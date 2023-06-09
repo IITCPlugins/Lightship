@@ -1,0 +1,10 @@
+{
+  "name": "IITC plugin: Lightship",
+  "id": "iitc_plugin_Lightship",
+  "category": "Highlighter",
+  "description": "Highlight Overclock portals",
+  "author": "McBen",
+  "entry": "src/Main.ts",
+  "minimize": false,
+  "changelog": ""
+}
