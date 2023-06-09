@@ -6,5 +6,6 @@
   "author": "McBen",
   "entry": "src/Main.ts",
   "minimize": false,
-  "changelog": ""
+  "changelog": "",
+  "downloadURL": "https://github.com/IITCPlugins/Lightship/raw/main/dist/iitc_plugin_Lightship.user.js"
 }

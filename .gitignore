@@ -1,3 +1,4 @@
 /node_modules/
 /dist/*
 !dist/iitc_plugin_Lightship.user.js
+!dist/iitc_plugin_Lightship.meta.js
