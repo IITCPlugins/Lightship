@@ -5,13 +5,13 @@ require "csv"
 
 DB_URI = "https://storage.googleapis.com/prod-geoservice-lightship/POIsLightshipDevPortal.csv"
 LOCAL_DB = "./POIsLightshipDevPortal.csv"
-MAX_TIME = 60*60*1000
+MAX_TIME = 60*60 # 1h
 
 RESULT = "./src/Database.ts"
 
 
 def loadDB
-    if !File.exist?( LOCAL_DB )  then # || (Time.now - File.mtime(LOCAL_DB)) > MAX_TIME then
+    if !File.exist?( LOCAL_DB ) || (Time.now - File.mtime(LOCAL_DB)) > MAX_TIME then
         puts "download DB"
         db = URI.open(DB_URI) { |io| io.read }
         File.open(LOCAL_DB, "wb") { |file| file.write(db) }
