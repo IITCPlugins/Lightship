@@ -6,6 +6,7 @@ require "csv"
 DB_URI = "https://storage.googleapis.com/prod-geoservice-lightship/POIsLightshipDevPortal.csv"
 LOCAL_DB = "./POIsLightshipDevPortal.csv"
 MAX_TIME = 12 * 60*60 # 12h
+MAX_ENTRIES_PER_LINE = 24
 
 RESULT = "./src/Database.ts"
 
@@ -24,15 +25,29 @@ end
 
 def generateID(rows)
     return rows.map { |row| "\"#{(row[6].to_f*1e6).to_i.to_s(36)}#{(row[5].to_f*1e6).to_i.to_s(36)}\""}
-            .sort
 end
 
 def getIDList(keys)
-    keys.each_slice(8)
-        .to_a
-        .map {|x| x.join(",")} 
-        .join(",\n    ")
+    keys.sort!
+    keys = grouping(keys, 1) 
+    keys.map{ |x| x.join(",")}.join(",\n    ")
 end
+
+
+def grouping(keys, level) 
+    result = []
+    keys = keys.group_by { |i| i[level]}
+
+    keys.values.each { |x| 
+        if x.length > MAX_ENTRIES_PER_LINE then 
+            result.push *grouping(x,level+1) 
+        else
+            result.push x
+        end
+    }
+    return result
+end
+
 
 db = loadDB
 puts "parse"
@@ -44,10 +59,10 @@ puts "write"
 File.open(RESULT, "wt") { |file| 
     file.write("export const lightshipDBProd = [\n    ")
     file.write(getIDList(generateID(production)))
-    file.write("];\n")
+    file.write("\n];\n")
 
     file.write("\nexport const lightshipDBRest = [\n    ")
     file.write(getIDList(generateID(others))) 
-    file.write("];\n")
+    file.write("\n];\n")
 
 }
