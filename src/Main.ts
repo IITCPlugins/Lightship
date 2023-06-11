@@ -1,5 +1,5 @@
 import * as Plugin from "iitcpluginkit";
-import { lightshipDB } from "./Database";
+import { lightshipDBProd, lightshipDBRest } from "./Database";
 
 // FIXME in iitcpluginkit
 declare global {
@@ -13,23 +13,34 @@ declare global {
 
 class Lightship implements Plugin.Class {
 
+    private prod: Set<string>;
+    private rest: Set<string>;
+
     init(): void {
         window.addPortalHighlighter("Lightship", (this as unknown as Hightligher));
     }
 
     setSelected(activate: boolean): void {
         if (activate) {
-            // TODO: init DB here
+            if (!this.prod) {
+                this.prod = new Set(lightshipDBProd);
+                this.rest = new Set(lightshipDBRest);
+
+            }
         }
     }
 
     highlight(data: { portal: IITC.Portal }): void {
         const d = data.portal.options.data;
 
-        const id = d.latE6.toString(36) + "_" + d.lngE6.toString(36)
+        const id = d.latE6.toString(36) + d.lngE6.toString(36);
 
-        if (lightshipDB.has(id)) {
+        if (this.prod.has(id)) {
             data.portal.setStyle({ fillColor: "yellow" });
+        } else {
+            if (this.rest.has(id)) {
+                data.portal.setStyle({ fillColor: "orange" });
+            }
         }
     }
 }
