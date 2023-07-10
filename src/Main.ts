@@ -17,7 +17,7 @@ class Lightship implements Plugin.Class {
     private rest: Set<string>;
 
     init(): void {
-        window.addPortalHighlighter("Lightship", (this as unknown as Hightligher));
+        window.addPortalHighlighter("Overclock", (this as unknown as Hightligher));
     }
 
     setSelected(activate: boolean): void {
@@ -44,6 +44,7 @@ class Lightship implements Plugin.Class {
         }
     }
 }
+
 
 /**
  * use "main" to access you main class from everywhere
