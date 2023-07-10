@@ -1,3 +1,6 @@
+v1.1.1
+- DB Update
+
 v1.1
 - split prod + rest
 - load DB into memory on activation
