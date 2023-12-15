@@ -1,0 +1,11 @@
+name: DB Update
+
+on: workflow_dispatch
+
+jobs:
+  db_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: ruby -r ./build_db.rb
