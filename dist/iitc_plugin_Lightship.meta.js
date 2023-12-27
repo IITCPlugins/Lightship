@@ -2,7 +2,7 @@
 // @name            IITC plugin: Lightship
 // @id              iitc_plugin_Lightship
 // @category        Highlighter
-// @version         1.1.5.231215
+// @version         1.1.6.231227
 // @namespace       https://github.com/IITC-CE/ingress-intel-total-conversion
 // @updateURL       https://github.com/IITCPlugins/Lightship/raw/main/dist/iitc_plugin_Lightship.meta.js
 // @downloadURL     https://github.com/IITCPlugins/Lightship/raw/main/dist/iitc_plugin_Lightship.user.js
